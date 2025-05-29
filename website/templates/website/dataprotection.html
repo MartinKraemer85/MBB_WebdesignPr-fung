@@ -1,0 +1,28 @@
+{% extends "website/index.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'website/src/css/impressum_dataprotection.css' %}" />
+    <article class="legal-section">
+        <h1>Datenschutzerklärung</h1>
+        <p>Die Privatsphäre unserer Besucher – ob menschlich oder meerschweinisch – liegt uns besonders am Herzen.</p>
+
+        <h2>Erfassung allgemeiner Informationen</h2>
+        <p>Unsere Seite speichert keine persönlichen Daten. Das einzige, was hier gesammelt wird, ist frisches Heu. 🐾</p>
+
+        <h2>Cookies</h2>
+        <p>
+            Wir nutzen keine Cookies – es sei denn, man meint damit die Erbsenchips, die wir so gerne verputzen. Diese
+            sind aber leider nicht im Browser gespeichert.
+        </p>
+
+        <h2>Weitergabe von Daten</h2>
+        <p>Keine Sorge: Weder eure Daten noch eure Salatvorräte werden mit Dritten geteilt.</p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Bei Fragen zum Datenschutz meldet euch bei unserem Datenschutzbeauftragten: <a href="mailto:mbb@meerschweinchen.gourmet">Momo</a>
+        </p>
+    </article>
+{% endblock content %}

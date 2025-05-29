@@ -1,0 +1,15 @@
+{% extends "website/index.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'guineapigfoodcontrol/src/css/form.css' %}" />
+    <article class="legal-section">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Speichern</button>
+        </form>
+    </article>
+{% endblock content %}

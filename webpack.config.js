@@ -3,7 +3,7 @@ const glob = require('glob');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
-const apps = ['foodplaner', 'navigation'];  // List of apps with TypeScript files
+const apps = ['guineapigfoodcontrol', 'website'];  // List of apps with TypeScript files
 const getEntryObject = () => {
   const entries = {};
 

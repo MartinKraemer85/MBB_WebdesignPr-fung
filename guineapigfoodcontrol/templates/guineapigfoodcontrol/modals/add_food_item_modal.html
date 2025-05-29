@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet"
+      type="text/css"
+      href="{% static 'guineapigfoodcontrol/src/css/modal.css' %}" />
+
+<div id="addItemModal"
+     class="modal hidden"
+     onclick="handleOverlayClick(event)">
+    <div class="modal-content">
+        <span class="close-button"
+              id="closeModalBtn"
+              onclick="handleCloseModalBtnClick()">&times;</span>
+        <h2>Nahrungsmittel</h2>
+        <div class="food-item-wrapper">
+            {% for food_item in food_items %}
+                {% include "guineapigfoodcontrol/partials/food_item.html" with food_item=food_item entry_item=item amount="0" add="1" only %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

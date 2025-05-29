@@ -1,0 +1,13 @@
+{% extends "website/index.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'guineapigfoodcontrol/src/css/food-item.css' %}" />
+    <div class="food-item-wrapper">
+        {% for food_item in food_items %}
+            {% include "guineapigfoodcontrol/partials/food_item.html" with food_item=food_item entry_item=item amount="0" add="0" only %}
+        {% endfor %}
+    </div>
+{% endblock content %}

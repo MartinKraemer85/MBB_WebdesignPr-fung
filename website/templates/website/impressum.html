@@ -1,0 +1,34 @@
+{% extends "website/index.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'website/src/css/impressum_dataprotection.css' %}" />
+    <article class="legal-section">
+        <h1>Impressum</h1>
+        <p>
+            <strong>Meerschweinchen Gourmet GmbH</strong>
+        </p>
+        <p>
+            Heuburg 7
+            <br />
+            12345 Nagerstadt
+        </p>
+        <p>Vertreten durch: Bocchi, Chefköchin und Gourmet-Direktorin 🐹</p>
+
+        <h2>Kontakt</h2>
+        <p>
+            E-Mail: <a href="mailto:mbb@meerschweinchen.gourmet">mbb@meerschweinchen.gourmet</a>
+        </p>
+
+        <h2>Haftungsausschluss</h2>
+        <p>
+            Wir übernehmen keine Haftung für Erbsenchips-Allergien oder übermäßige
+            Niedlichkeit. Der Inhalt dieser Seite dient ausschließlich zur Unterhaltung und zur Förderung der Meerschweinchen-Kulinarik.
+        </p>
+
+        <h2>Verantwortlich für den Inhalt</h2>
+        <p>Bertram, der Mann fürs Grobe und Zuständig für Beschwerden (wenn's kein Futter gibt).</p>
+    </article>
+
+{% endblock content %}

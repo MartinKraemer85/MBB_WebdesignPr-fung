@@ -1,0 +1,32 @@
+{% extends "website/index.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'website/src/css/contact_us.css' %}" />
+    <article class="legal-section">
+        <form onsubmit="handleFormSubmit(event)" method="post">
+            <label for="fname">Vorname:</label>
+            <input type="text" id="fname" name="fname" placeholder="Name" required />
+            <label for="lname">Nachname:</label>
+            <input type="text" id="lname" name="lname" placeholder="Nachname" required />
+            <label for="phone">Telefonnummer:</label>
+            <input type="text" id="tel" name="phone" placeholder="+49 0" required />
+            <label for="mail">Email:</label>
+            <input type="email"
+                   id="mail"
+                   name="name"
+                   placeholder="mail@meeris.wiese"
+                   required />
+            <button type="submit">Submit</button>
+        </form>
+    </article>
+
+    <aside>
+        <a href="{% static 'website/src/pdf/dummy.pdf' %}" download>
+            <button>
+                <img src="{% static 'website/src/svg/download.svg' %}" alt="#" />
+            </button>
+        </a>
+    </aside>
+{% endblock content %}

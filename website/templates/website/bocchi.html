@@ -1,0 +1,14 @@
+{% extends "website/index.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'website/src/css/bocchi.css' %}" />
+    <article class="memorial">
+        <h1>💓 In Gedenken an Bocchi 💓</h1>
+        <div class="memorial-img-wrapper">
+            <img src="{% static 'website/src/img/bocchi.jpg' %}"
+                 alt="Bocchi in Erinnerung" />
+        </div>
+    </article>
+{% endblock content %}

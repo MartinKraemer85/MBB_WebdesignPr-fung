@@ -1,0 +1,5 @@
+<div class="food-content" id="foodContent">
+    {% for item in food_entry.foodentryitem_set.all %}
+        {% include "guineapigfoodcontrol/partials/food_item.html" with food_item=item.food entry_item=item amount="1" add="0" only %}
+    {% endfor %}
+</div>
