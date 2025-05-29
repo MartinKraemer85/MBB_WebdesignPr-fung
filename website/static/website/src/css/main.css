@@ -158,7 +158,7 @@ nav ul {
         height: var(--burger-menue-size);
 
         border-radius: 5px;
-        background-color: #4CAF50;
+        background-color: var(--input-background-color-dark);
         padding: 0.3rem;
         cursor: pointer;
     }
