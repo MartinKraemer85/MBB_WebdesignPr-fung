@@ -119,39 +119,82 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const elements = {};
+var imageList = { "item": {}, "length": 0 };
 const domEventHandler = {
     handleImageClick: (el) => {
         setTimeout(() => {
-            elements.modal.classList.remove("hidden");
-            const modalImage = document.createElement("img");
-            modalImage.src = el.src;
-            modalImage.alt = el.alt;
-            modalImage.style.pointerEvents = "none";
-            modalImage.classList.add("modal-img");
-            modalImage.onmouseover = null;
-            modalImage.onclick = null;
+            const slider = elements.slider;
+            //const images = slider.images;
+            for (let i = 0; i < imageList.length; i++) {
+                if (imageList[i] === el) {
+                    slider.counter = i;
+                    break;
+                }
+            }
+            const modal = elements.modal;
+            var modalImage = elements.modalImage;
+            modal.classList.remove("hidden");
+            const modalImageNew = document.createElement("img");
+            modalImageNew.src = el.src;
+            modalImageNew.alt = el.alt;
+            modalImageNew.style.pointerEvents = "none";
+            modalImageNew.classList.add("modal-img");
+            modalImageNew.onmouseover = null;
+            modalImageNew.onclick = null;
             // Modal-Inhalt ersetzen
-            elements.modalImg.innerHTML = ""; // Clear previous image
-            elements.modalImg.appendChild(modalImage);
+            modalImage.innerHTML = ""; // Clear previous image
+            modalImage.appendChild(modalImageNew);
         }, 100);
     },
-    handleCloseModalBtnClick: () => elements.modal.classList.add("hidden"),
     handleOverlayClick: (e) => {
+        console.log("test");
+        console.log(e.target);
+        console.log(elements.modal);
         if (e.target === elements.modal) {
             elements.modal.classList.add("hidden");
         }
     },
+    chevronLeft: () => {
+        const slider = elements.slider;
+        slider.counter--;
+        if (slider.counter < 0)
+            slider.counter = slider.imageCount - 1;
+        const currentImage = slider.images[slider.counter];
+        const modalImage = elements.modalImage;
+        modalImage.innerHTML = ""; // Clear previous image
+        modalImage.appendChild(cloneNode(currentImage));
+    },
+    chevronRight: () => {
+        const slider = elements.slider;
+        slider.counter--;
+        if (slider.counter < 0)
+            slider.counter = slider.imageCount - 1;
+        const currentImage = slider.images[slider.counter];
+        const modalImage = elements.modalImage;
+        modalImage.innerHTML = ""; // Clear previous image
+        modalImage.appendChild(cloneNode(currentImage));
+    }
 };
 const domMapping = () => {
     elements.modal = document.getElementById("modal");
-    elements.modalImg = document.getElementById("modal-img");
+    elements.modalImage = document.getElementById("modal-img");
+    var images = document.getElementById("image-wrapper");
+    imageList = images.children;
+    elements.slider = { images: images.children, counter: 0, imageCount: images.children.length };
+};
+const cloneNode = (image) => {
+    const clonedImage = image.cloneNode(true);
+    clonedImage.classList.add("modal-img");
+    clonedImage.style.pointerEvents = "none";
+    clonedImage.onmouseover = null;
+    clonedImage.onclick = null;
+    return clonedImage;
 };
 // =======================
 // Init Function
 // =======================
 const init = () => {
     domMapping();
-    console.log("test");
     (0,_general__WEBPACK_IMPORTED_MODULE_0__.addDomFunctions)(domEventHandler);
 };
 // =======================

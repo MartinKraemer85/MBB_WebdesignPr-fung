@@ -151,7 +151,9 @@
                 <p>In Erinnerung an Bocchi, unsere kleine Gourmet-Queen. 🐹💛</p>
             </div>
         </footer>
-        <script src="{% static 'foodplaner/src/js/calendar.js' %}"></script>
+        {% if clanedar %}
+            <script src="{% static 'foodplaner/src/js/calendar.js' %}"></script>
+        {% endif %}
         <script src="{% static 'navigation/src/js/index.js' %}"></script>
     </body>
 </html>

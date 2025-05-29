@@ -79,6 +79,7 @@ def calendar(request: HttpRequest, year=None, month=None, day=None) -> HttpRespo
             "food_items": food_items,
             "selected_date": selected_date,
             "food_entry": food_entry,
+            "calendar": 1,
         },
     )
 

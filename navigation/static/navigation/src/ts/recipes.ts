@@ -2,14 +2,14 @@
 "use strict";
 import { addIntersectionArticle } from "./general";
 
-const elements: ISlider = {}
+const elements: ISliderRecipie = {}
 
 const toggleRecipeVisibility = (el: HTMLElement, show: boolean): void => {
     el.classList.toggle("show-recipe", show);
     el.classList.toggle("hide-recipe", !show);
 };
 
-const sliderLeft = (slider: SliderData): void => {
+const sliderLeft = (slider: ISliderRecipiesData): void => {
     toggleRecipeVisibility(slider.articles[slider.counter], false);
 
     slider.counter--;
@@ -18,7 +18,7 @@ const sliderLeft = (slider: SliderData): void => {
     toggleRecipeVisibility(slider.articles[slider.counter], true);
 };
 
-const sliderRight = (slider: SliderData): void => {
+const sliderRight = (slider: ISliderRecipiesData): void => {
     toggleRecipeVisibility(slider.articles[slider.counter], false);
 
     slider.counter++;

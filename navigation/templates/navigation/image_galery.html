@@ -8,10 +8,11 @@
      <article>
           <div id="modal" class="modal hidden" onclick="handleOverlayClick(event)">
                <div class="modal-content">
-                    <span class="close-button"
-                          id="closeModalBtn"
-                          onclick="handleCloseModalBtnClick()">&times;</span>
                     <div id="modal-img"></div>
+                    <div class="navigation">
+                         <div class="nav-chevron left" onclick="chevronLeft()"></div>
+                         <div class="nav-chevron right" onclick="chevronRight()"></div>
+                    </div>
                </div>
           </div>
           <div class="image-wrapper" id="image-wrapper">

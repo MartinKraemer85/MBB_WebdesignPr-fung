@@ -3,39 +3,87 @@ import { addDomFunctions } from "./general";
 
 
 const elements: IHtmlList = {};
+var imageList: HTMLCollection = { "item": {}, "length": 0 } as HTMLCollection;
 
 const domEventHandler = {
     handleImageClick: (el: HTMLImageElement) => {
         setTimeout(() => {
-            elements.modal.classList.remove("hidden");
+            const slider = elements.slider as ISliderImgData;
+            //const images = slider.images;
 
-            const modalImage = document.createElement("img");
-            modalImage.src = el.src;
-            modalImage.alt = el.alt;
+            for (let i = 0; i < imageList.length; i++) {
+                if (imageList[i] === el) {
+                    slider.counter = i;
+                    break;
+                }
+            }
 
-            modalImage.style.pointerEvents = "none";
-            modalImage.classList.add("modal-img");
-            modalImage.onmouseover = null;
-            modalImage.onclick = null;
+            const modal = elements.modal as HTMLElement;
+            var modalImage = elements.modalImage as HTMLElement;
+            modal.classList.remove("hidden");
+
+            const modalImageNew = document.createElement("img");
+            modalImageNew.src = el.src;
+            modalImageNew.alt = el.alt;
+
+            modalImageNew.style.pointerEvents = "none";
+            modalImageNew.classList.add("modal-img");
+            modalImageNew.onmouseover = null;
+            modalImageNew.onclick = null;
 
             // Modal-Inhalt ersetzen
-            elements.modalImg.innerHTML = ""; // Clear previous image
-            elements.modalImg.appendChild(modalImage);
-        }, 100);
 
+            modalImage.innerHTML = ""; // Clear previous image
+            modalImage.appendChild(modalImageNew);
+        }, 100);
     },
-    handleCloseModalBtnClick: () => elements.modal.classList.add("hidden"),
     handleOverlayClick: (e: Event) => {
         if (e.target === elements.modal) {
             elements.modal.classList.add("hidden");
         }
     },
+    chevronLeft: () => {
+        const slider = elements.slider as ISliderImgData;
+        slider.counter--;
+        if (slider.counter < 0) slider.counter = slider.imageCount - 1;
+        const currentImage = slider.images[slider.counter] as HTMLImageElement;
+
+        const modalImage = elements.modalImage as HTMLElement;
+        modalImage.innerHTML = ""; // Clear previous image
+        modalImage.appendChild(cloneNode(currentImage));
+    },
+    chevronRight: () => {
+        const slider = elements.slider as ISliderImgData;
+
+        slider.counter--;
+        if (slider.counter < 0) slider.counter = slider.imageCount - 1;
+        const currentImage = slider.images[slider.counter] as HTMLImageElement;
+        const modalImage = elements.modalImage as HTMLElement;
+
+        modalImage.innerHTML = ""; // Clear previous image
+        modalImage.appendChild(cloneNode(currentImage));
+    }
 }
 
 const domMapping = () => {
     elements.modal = document.getElementById("modal") as HTMLElement;
-    elements.modalImg = document.getElementById("modal-img") as HTMLElement;
+    elements.modalImage = document.getElementById("modal-img") as HTMLElement;
+    var images = document.getElementById("image-wrapper") as HTMLElement;
+    imageList = images.children;
+    elements.slider = { images: images.children, counter: 0, imageCount: images.children.length } as ISliderImgData;
 };
+
+
+const cloneNode = (image: HTMLImageElement) => {
+    const clonedImage = image.cloneNode(true) as HTMLImageElement;
+    clonedImage.classList.add("modal-img");
+    clonedImage.style.pointerEvents = "none";
+    clonedImage.onmouseover = null;
+    clonedImage.onclick = null;
+
+    return clonedImage;
+}
+
 
 // =======================
 // Init Function
@@ -43,8 +91,6 @@ const domMapping = () => {
 
 const init = () => {
     domMapping();
-    console.log("test");
-
     addDomFunctions(domEventHandler);
 };
 
