@@ -9,8 +9,22 @@ const handleSocialClick = (el: HTMLImageElement) => {
 
 const setActiveNavigation = () => {
     const filename = window.location.pathname.split("/").pop();
-    const link = document.querySelector(`.navigation a[href="./${filename}"]`)?.parentElement
+
+    if (window.location.pathname?.startsWith("/guineapigfoodcontrol")) {
+        const link = document.querySelector(`.submenu_parent a`)
+
+        if (link) link.classList.add("active");
+    }
+
+    const link = document.querySelector(`.navigation a[href="/${filename}"]`)?.parentElement
+
     if (link) link.classList.add("active");
+    if (!link) {
+        const link = document.querySelector(`.submenu a[href="${window.location.pathname}"]`)?.parentElement
+
+        if (link) link.classList.add("active");
+
+    }
 }
 
 const footerEventHandler = {
