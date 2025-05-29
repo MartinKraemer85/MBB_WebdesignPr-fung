@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="description"
+              content="Dies ist eine Seite über die Meerschweinchen, und deren culinarischen Vorzüge, sowie deren Sportliche aktivitäten." />
+        <meta name="keywords"
+              content="Meerschweinchen, Haustiere, Nagetiere, Meerschweinchen Ernährung, Meerschweinchen Rezepte, Meerschweinchen Sport, lustige Meerschweinchen, Meerschweinchen Tipps" />
+        <meta name="csrf-token" content="{{ csrf_token }}" />
+
+        <!-- Favicon -->
+        {% comment %} <link rel="stylesheet" href="{% static 'navigation/src/css/bootstrap.min.css' %}" />
+        {% endcomment %}
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'navigation/src/css/variables.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'navigation/src/css/main.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'navigation/src/css/index.css' %}" />
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'foodplaner/src/css/food-item.css' %}" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'foodplaner/src/css/calendar.css' %}" />
+
+        <link rel="icon"
+              href="{% static 'navigation/src/fav/favicon.ico' %}"
+              type="image/x-icon" />
+        <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <header>
+            <div class="burger-menue">
+                <input type="checkbox" id="menu-toggle" />
+                <label for="menu-toggle" class="menu-toggle" id="label-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <nav>
+                    <a href="{% url 'navigation:navigation' %}" class="logo-link">
+                        <div class="logo">
+                            <div class="chevron">M</div>
+                            <div class="chevron">B</div>
+                            <div class="chevron">B</div>
+                        </div>
+                    </a>
+                    <div class="navigation">
+                        <ul>
+                            <li>
+                                <a href="{% url 'navigation:about_us' %}">Über uns</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'navigation:recipes' %}">Unsere Rezepte</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'navigation:image_galery' %}">Bilder</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'navigation:sports' %}">Unsere Sportempfehlungen</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'navigation:bocchi' %}">In Gedenken an Bocchi</a>
+                            </li>
+                            {% now "Y" as current_year %}
+                            {% now "n" as current_month %}  {# "n" = keine führenden Nullen #}
+                            {% now "j" as current_day %}
+                            <li>
+                                <a href="{% url 'foodplaner:calendar_with_date' year=current_year month=current_month day=current_day %}">Kalender</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'foodplaner:food_items' %}">Nahrungsmittel</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'foodplaner:add_food_items' %}">Hinzufügen</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'navigation:contact_us' %}">Kontaktiert uns!</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main id="main">
+            {% if request.path == '/' %}
+                <section>
+                    <div class="hero-image">
+                        <div class="hero-text">
+                            <h1>Wir sind Momo, Bocchi und Bertram</h1>
+                            <p>Und wir sind Nahrungsbewusste Schweinchen</p>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer>
+            <!-- footer -->
+            <div class="place">
+                <h3>Wohnort</h3>
+                <address>
+                    Heuburg 7
+                    <br />
+                    12345 Nagerstadt
+                </address>
+
+                <h3>Kontakt</h3>
+                <p>
+                    <a href="mailto:mbb@meerschweinchen.gourmet">mbb@meerschweinchen.gourmet</a>
+                </p>
+            </div>
+
+            <div class="social-media">
+                <h3>Folgt uns</h3>
+                <div class="social-icons">
+                    <img data-social="Facebook"
+                         src="{% static 'navigation/src/svg/facebook.svg' %}"
+                         alt="Facebook"
+                         onclick="handleSocialClick(this)" />
+
+                    <img data-social="instagram"
+                         src="{% static 'navigation/src/svg/instagram.svg' %}"
+                         alt="instagram"
+                         onclick="handleSocialClick(this)" />
+
+                    <img data-social="YouTube"
+                         src="{% static 'navigation/src/svg/youtube.svg' %}"
+                         alt="YouTube"
+                         onclick="handleSocialClick(this)" />
+                </div>
+            </div>
+
+            <div class="legal">
+                <h3>Rechtliches</h3>
+                <p>
+                    <a href="{% url 'navigation:impressum' %}">Impressum</a> | <a href="{% url 'navigation:dataprotection' %}">Datenschutz</a>
+                </p>
+            </div>
+
+            <div class="memories">
+                <p>In Erinnerung an Bocchi, unsere kleine Gourmet-Queen. 🐹💛</p>
+            </div>
+        </footer>
+        <script src="{% static 'foodplaner/src/js/calendar.js' %}"></script>
+        <script src="{% static 'navigation/src/js/index.js' %}"></script>
+    </body>
+</html>

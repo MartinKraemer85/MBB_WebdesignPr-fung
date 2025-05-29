@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "fooddoku"
+version = "0.1.0"
+description = ""
+authors = ["biber"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13.2"
+django = "^5.0.7"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.2"
+mypy = "^1.10.0"
+django-types = "^0.19.1"
+poetry-plugin-export = "^1.8.0"
+django-debug-toolbar = "^4.4.6"
+djlint = "^1.35.2"
+
+[tool.poetry.group.production.dependencies]
+gunicorn = "^22.0.0"
+psycopg2-binary = "^2.9.9"
+mysqlclient = "^2.2.4"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
+[tool.ruff.lint]
+extend-select = [
+    # pycodestyle (Code style)
+    "E",
+    "W",
+    # pyflakes (Remove unused imports and variables)
+    "F",
+    # isort (Sort imports)
+    "I",
+    # pyupgrade (Update syntax to new Python version)
+    "UP",
+    # flake8-simplify (Simplify code)
+    "SIM",
+    # flake8-comprehensions (Simplify comprehensions)
+    "C4",
+    # Perflint (Performance anti-patterns)
+    "PERF",
+    # flynt (Format-strings to F-strings)
+    "FLY",
+]
+ignore = [
+    # E501 Line too long (x > 120 characters)
+    "E501",
+    # `try`-`except` within a loop incurs performance overhead
+    "PERF203",
+]
+
+# Add configuration for Black users
+[tool.black]
+line-length = 120
+
+[tool.djlint]
+profile = "django"
+max_line_length = 120
+max_blank_lines = 2
+close_void_tags = true
+format_css = true
+format_js = true
+
+# H006: img-tags should have width and height attributes
+# H014: Extra blank ines
+# H021: Inline styles should be avoided
+ignore = "H006,H014,H021"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

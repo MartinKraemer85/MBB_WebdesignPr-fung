@@ -1,0 +1,33 @@
+{
+  "name": "foodstuff",
+  "version": "1.0.0",
+  "description": "foodstuff Website\r ======================",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --mode production",
+    "watch": "npx webpack --watch",
+    "project:init": "python3 scripts/initialize-environment.py init",
+    "project:clean": "python3 scripts/initialize-environment.py delete;python3 scripts/initialize-environment.py init",
+    "project:freeze-requirements": "poetry run scripts/freeze-development-requirements.sh > requirements-development.txt;poetry run scripts/freeze-production-requirements.sh > requirements.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.10",
+    "css-loader": "^5.0.0",
+    "glob": "^7.0.0",
+    "ignore-loader": "^0.1.2",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.4.0",
+    "typescript": "^4.9.5",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0"
+  }
+}

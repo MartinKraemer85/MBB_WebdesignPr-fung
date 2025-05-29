@@ -1,0 +1,44 @@
+@charset "0UTF-8";
+
+/* variables */
+:root {
+    --panel-height: 50svh;
+    --panel-controls-height: 5em;
+    --burger-menue-size: 3rem;
+    --input-background-color-dark: #2a2a2a;
+    --input-color-light: #f5f5f5;
+    --input-border: 1px solid #333;
+    --panel-color: #1a1a1a;
+
+
+    --bocchi-black: #0a0b0e;
+    --bocchi-brown: #b6967c;
+    --bocchi-brown-dark: #3a281c;
+    --bocchi-background: #0A0B0E;
+    --bocchi-gradient: linear-gradient(90deg, rgba(10, 11, 14, 1) 0%, rgba(182, 150, 124, 1) 50%, rgba(58, 40, 28, 1) 100%);
+
+    --momo-white: #d7dddd;
+    --momo-black: #0a0d12;
+    --momo-background: #D7DDDD;
+    --momo-gradient: linear-gradient(90deg, rgba(10, 13, 18, 1) 0%, rgba(215, 221, 221, 1) 100%);
+
+    --bertram-dark: #4c1d09;
+    --bertram-light: #ce9668;
+    --bertram-background: #CE9668;
+    --bertram-gradient: linear-gradient(90deg, rgba(206, 150, 104, 1) 1%, rgba(76, 29, 9, 1) 100%);
+
+    --chevron-size: 4rem;
+    --chevron-margin: calc(-1* var(--chevron-size)*0.3);
+    --chevorn-font-size: calc(var(--chevron-size)*0.5);
+
+    --navigation-color: #111;
+    --background-color: #1a1a1a;
+    --link-hover-color: #222;
+
+    --burger-menue-size: 4rem;
+
+    --input-background-color-dark: #2a2a2a;
+    --input-color-light: #f5f5f5;
+    --input-border: 1px solid #333;
+    --form-background: rgba(255, 255, 255, 0.03);
+}

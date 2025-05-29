@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "es2016"
+    ],
+    "typeRoots": [
+      "./*/static/*/src/ts/types/index.d.ts", // Add this to tell TypeScript where to look for custom types
+      "./node_modules/@types"
+    ],
+    "outDir": "./",
+    "rootDir": "./"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

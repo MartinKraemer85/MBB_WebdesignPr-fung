@@ -1,0 +1,13 @@
+import os
+
+input_folder = "./src/img/"
+image_ext = ".jpg"
+
+
+images = sorted([f for f in os.listdir(input_folder) if f.endswith(image_ext)])
+
+html = ""
+for img in images:
+    html += f'<img src="{input_folder}{img}" alt="{img}" onclick="handleImageClick(this)">\n'
+
+print(html)

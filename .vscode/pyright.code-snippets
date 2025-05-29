@@ -1,0 +1,33 @@
+{
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"pyright-ignore-override-django-meta-class": {
+		"scope": "python",
+		"prefix": "pyright-ignore-override-django-meta-class",
+		"body": [
+			"# pyright: ignore[reportIncompatibleVariableOverride]"
+		]
+	},
+	"pyright-ignore-django-model-field-choices-type": {
+		"scope": "python",
+		"prefix": "pyright-ignore-django-model-field-choices-type",
+		"body": [
+			"# pyright: ignore[reportCallIssue, reportArgumentType]"
+		]
+	},
+	"pyright-ignore-attribute-access-issue": {
+		"scope": "python",
+		"prefix": "pyright-ignore-attribute-access-issue",
+		"body": [
+			"# pyright: ignore[reportAttributeAccessIssue]"
+		]
+	},
+}

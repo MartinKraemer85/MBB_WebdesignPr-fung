@@ -1,0 +1,248 @@
+/* general */
+.calendar-wrapper,
+.item-wrapper {
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+h1 {
+    text-align: center;
+}
+
+.calendar-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 days per row */
+    gap: 10px;
+}
+
+.calendar-row {
+    display: flex;
+    flex: 1;
+    /* Alle Wochen gleich viel Platz */
+}
+
+.day {
+    text-align: center;
+
+    label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}
+
+.day-check {
+    display: none;
+}
+
+.day:hover {
+    background-color: #2a2a2a;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+
+/* Markierter Zustand */
+.day-check:checked+label {
+    background-color: #37474f;
+    color: white;
+    font-weight: bold;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+}
+
+.day-check:checked~button {
+    display: block;
+}
+
+
+/* day styling */
+.day-name {
+    font-weight: bold;
+    text-align: center;
+}
+
+.day {
+    padding: 1em;
+    text-align: center;
+}
+
+.saturday {
+    color: blue;
+}
+
+.sunday {
+    color: red;
+}
+
+.open-modal-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #28a745;
+    /* Bootstrap-Grün */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: none;
+}
+
+.food-item-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.food-item-wrapper {
+    flex-grow: 1;
+    /* optional Scrollbar */
+    overflow-y: auto;
+    min-height: 0;
+    padding-right: 1em;
+    margin-bottom: 2svh;
+    min-height: clamp(600px, 70vh, 90vh)
+}
+
+.calorie-consumption-wrapper {
+    flex-shrink: 0;
+    padding: 1em;
+    border-top: 1px solid #ccc;
+}
+
+
+/* Bottom panel */
+
+
+.drag-handle {
+    width: 50px;
+    height: 6px;
+    background-color: #666;
+    border-radius: 3px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.food-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--panel-height);
+
+    background-color: var(--panel-color);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+
+    /* animation */
+    transition: transform 1s ease;
+    transform: translateY(calc(100% - 15vh));
+    /* only the top part is shown*/
+    z-index: 3;
+}
+
+.food-panel.open {
+    transform: translateY(0);
+    /* height of panel when "dragged in" */
+}
+
+.food-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 1s ease, max-height 1s ease, padding 1s ease;
+    padding: 0 2em;
+}
+
+.food-panel.open .food-content {
+    opacity: 1;
+    max-height: 500px;
+    pointer-events: auto;
+    overflow: auto;
+
+    padding: 1em 2em calc(2* var(--panel-controls-height)) 2em;
+}
+
+.month-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        font-size: 1.5rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5em;
+    }
+
+    h1 {
+        margin: 0;
+    }
+}
+
+
+
+/* open the panel with these parameters since there would be to much empty 
+ space otherwise -> calendar.html is the small js to archive the behaviour */
+@media (max-width: 600px) and (min-height: 800px) {
+    .food-panel.auto-open {
+        transform: translateY(0);
+    }
+
+    .food-panel.auto-open .food-content {
+        opacity: 1;
+        max-height: 500px;
+        pointer-events: auto;
+        overflow: auto;
+        padding: 1em 2em calc(2 * var(--panel-controls-height)) 2em;
+    }
+}
+
+/* controls */
+.food-panel-controls {
+    height: var(--panel-controls-height, 5em);
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 4;
+
+    input {
+        flex: 1;
+        padding: 0.5em 1em;
+        border-radius: 8px;
+        border: var(--input-border);
+        background-color: var(--input-background-color-dark);
+        color: var(--input-color-light);
+    }
+
+    button {
+        margin-left: 0.5em;
+        padding: 0.5em 1em;
+        border-radius: 8px;
+        background-color: #2196f3;
+        /* Android/Material Blue */
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+}

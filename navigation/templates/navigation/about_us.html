@@ -1,0 +1,69 @@
+{% extends "navigation/index.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'navigation/src/css/about_us.css' %}" />
+    <script src="{% static 'navigation/src/js/about_us.js' %}"></script>
+
+    <article id="momo" class="about">
+        <div class="about-card momo-gradient">
+            <div class="image-layer momo-background-img"></div>
+            <div class="text-layer">
+                <h1>Momo</h1>
+                <p>
+                    Ich bin Momo, die kleinste von uns dreien, auch wenn ich durch mein Fell viel größer wirke. Ich bin sehr schüchtern, kann aber
+                    auch
+                    gerne mal anfangen zu quieken, wenn die anderen quieken. Ich liege gerne in schlappen herum, und lasse mich auch gerne
+                    streicheln,
+                    wenn es dafür einen Erbsenchip gibt.
+                </p>
+            </div>
+        </div>
+    </article>
+    <div class="section-divider">
+        <span>🦫🐾🦫</span>
+    </div>
+    <article id="bocchi" class="about">
+        <div class="about-card bocchi-gradient">
+            <div class="image-layer bocchi-background-img"></div>
+            <div class="text-layer">
+                <h1>Bocchi</h1>
+                <p>
+                    Ich bin Bocchi. In meiner Freizeit esse ich gerne und klettere herum. Alle sagen das ich ein dickliches Schweinchen bin, dabei
+                    ist
+                    lediglich mein Fell schwerer als bei den anderen.
+                </p>
+            </div>
+        </div>
+    </article>
+    <div class="section-divider">
+        <span>🦫🐾🦫</span>
+    </div>
+    <article id="bertram" class="about">
+        <div class="about-card bertram-gradient">
+            <div class="image-layer bertram-background-img"></div>
+            <div class="text-layer">
+                <h1>Betram</h1>
+                <p>
+                    Ich bin Bertram, der Herr im Hause. Ich bin etwas jünger als die beiden Damen, aber ich lasse mir dennoch nichts von den alten
+                    Hühnern sagen. In meiner Freizeit laufe ich sehr viel, und wenn mein persönlicher Koch mal wieder zu lange mit dem Essen
+                    braucht,
+                    werde ich schon mal laut und pfeife in seine Richtung.
+                </p>
+            </div>
+        </div>
+    </article>
+    <aside>
+        <div class="chevron">
+            <a href="#momo">M</a>
+        </div>
+        <div class="chevron">
+            <a href="#bocchi">B</a>
+        </div>
+        <div class="chevron">
+            <a href="#bertram">B</a>
+        </div>
+    </aside>
+
+{% endblock content %}
