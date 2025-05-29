@@ -55,16 +55,30 @@ def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) 
             selected_date = date(shifted_year, shifted_month, 1)
     except ValueError:
         selected_date = date.today()
-
+    print(
+        get_guineapigfoodcontrol_days(selected_date.year, selected_date.month),
+    )
     food_items = Food.objects.all()
     food_entry, _ = FoodEntry.objects.get_or_create(date=selected_date)
+    weeks = []
+    for week in get_guineapigfoodcontrol_days(selected_date.year, selected_date.month):
+        days = []
+        for xday in week:
+            element = {}
+            element["day"] = xday
+            print(type(xday))
+            foodEntry = FoodEntry.objects.filter(date=xday).first()
+            if foodEntry is not None:
+                element["result"] = foodEntry.total_calories()
+            print(f"element = {element}")
+            days.append(element)
+        weeks.append(days)
     if request.META.get("HTTP_HX_REQUEST"):
-        print(".......................................")
         return render(
             request,
             "guineapigfoodcontrol/partials/calendar_htmx.html",
             context={
-                "weeks": get_guineapigfoodcontrol_days(selected_date.year, selected_date.month),
+                "weeks": weeks,
                 "food_items": food_items,
                 "selected_date": selected_date,
                 "food_entry": food_entry,
@@ -75,7 +89,7 @@ def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) 
         request,
         "guineapigfoodcontrol/calendar.html",
         context={
-            "weeks": get_guineapigfoodcontrol_days(selected_date.year, selected_date.month),
+            "weeks": weeks,
             "food_items": food_items,
             "selected_date": selected_date,
             "food_entry": food_entry,

@@ -32,10 +32,11 @@
             <div class="day-name">Fr</div>
             <div class="day-name saturday">Sa</div>
             <div class="day-name sunday">So</div>
+
             {% for week in weeks %}
                 {% for day in week %}
-                    <div class="day{% if day.weekday == 5 %} saturday {% elif day.weekday == 6 %} sunday {% else %} weekday {% endif %}"
-                         onclick="handleguineapigfoodcontrolClick(this, '{{ day.day }}','{{ day.month }}','{{ day.year }}')"
+                    <div class="day{% if day.day.weekday == 5 %} saturday {% elif day.day.weekday == 6 %} sunday {% else %} weekday {% endif %}"
+                         onclick="handleguineapigfoodcontrolClick(this, '{{ day.day.day }}','{{ day.day.month }}','{{ day.day.year }}')"
                          hx-get="{% url 'guineapigfoodcontrol:get_foodentry' %}"
                          hx-trigger="click"
                          hx-include="#selectedDateField"
@@ -44,9 +45,15 @@
                         <input type="radio"
                                name="selected_day"
                                class="day-check"
-                               id="{{ day.day }}.{{ day.month }}.{{ day.year }}"
-                               {% if day == selected_date %}checked{% endif %} />
-                        <label for="{{ day.day }}.{{ day.month }}.{{ day.year }}">{{ day.day }}</label>
+                               id="{{ day.day.day }}.{{ day.day.month }}.{{ day.day.year }}"
+                               {% if day.day == selected_date %}checked{% endif %} />
+                        <label for="{{ day.day.day }}.{{ day.day.month }}.{{ day.day.year }}">
+                            {{ day.day.day }}
+                            {% if day.result %}
+                                <br />
+                                {{ day.result|floatformat:2 }}kcal
+                            {% endif %}
+                        </label>
                     </div>
                 {% endfor %}
             {% endfor %}

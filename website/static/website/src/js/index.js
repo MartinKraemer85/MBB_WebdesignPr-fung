@@ -126,21 +126,16 @@ const handleSocialClick = (el) => {
 const setActiveNavigation = () => {
     var _a, _b, _c;
     const filename = window.location.pathname.split("/").pop();
-    console.log(window.location.pathname);
-    console.log(filename);
     if ((_a = window.location.pathname) === null || _a === void 0 ? void 0 : _a.startsWith("/guineapigfoodcontrol")) {
         const link = document.querySelector(`.submenu_parent a`);
-        console.log(link);
         if (link)
             link.classList.add("active");
     }
     const link = (_b = document.querySelector(`.navigation a[href="/${filename}"]`)) === null || _b === void 0 ? void 0 : _b.parentElement;
-    console.log(link);
     if (link)
         link.classList.add("active");
     if (!link) {
         const link = (_c = document.querySelector(`.submenu a[href="${window.location.pathname}"]`)) === null || _c === void 0 ? void 0 : _c.parentElement;
-        console.log(link);
         if (link)
             link.classList.add("active");
     }

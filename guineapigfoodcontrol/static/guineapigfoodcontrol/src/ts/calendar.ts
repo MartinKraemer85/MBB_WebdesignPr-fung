@@ -79,9 +79,9 @@ const init = () => {
     // simulate the initial click when the Site is entered, to load the food-items,
     // if availeble
     const radioBtnSelectedDay = document.querySelector('input[name="selected_day"]:checked') as HTMLElement;
-    // const currentDay = radioBtnSelectedDay.parentElement;
+    const currentDay = radioBtnSelectedDay.parentElement;
 
-    // currentDay?.click();
+    currentDay?.click();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
