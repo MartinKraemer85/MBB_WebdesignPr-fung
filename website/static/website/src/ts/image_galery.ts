@@ -9,7 +9,6 @@ const domEventHandler = {
     handleImageClick: (el: HTMLImageElement) => {
         setTimeout(() => {
             const slider = elements.slider as ISliderImgData;
-            //const images = slider.images;
 
             for (let i = 0; i < imageList.length; i++) {
                 if (imageList[i] === el) {
@@ -22,6 +21,7 @@ const domEventHandler = {
             var modalImage = elements.modalImage as HTMLElement;
             modal.classList.remove("hidden");
 
+            // create new Image 
             const modalImageNew = document.createElement("img");
             modalImageNew.src = el.src;
             modalImageNew.alt = el.alt;
@@ -31,8 +31,7 @@ const domEventHandler = {
             modalImageNew.onmouseover = null;
             modalImageNew.onclick = null;
 
-            // Modal-Inhalt ersetzen
-
+            // Replace Modal content
             modalImage.innerHTML = ""; // Clear previous image
             modalImage.appendChild(modalImageNew);
         }, 100);

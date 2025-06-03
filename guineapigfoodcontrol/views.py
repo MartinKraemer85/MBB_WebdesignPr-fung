@@ -41,7 +41,6 @@ def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) 
             shift = int(shift_str)
             current_date = date(year, month, day) if year and month and day else date.today()
 
-            # Monat anpassen
             shifted_month = current_date.month + shift
             shifted_year = current_date.year
 
@@ -66,11 +65,11 @@ def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) 
         for xday in week:
             element = {}
             element["day"] = xday
-            print(type(xday))
+
             foodEntry = FoodEntry.objects.filter(date=xday).first()
             if foodEntry is not None:
                 element["result"] = foodEntry.total_calories()
-            print(f"element = {element}")
+
             days.append(element)
         weeks.append(days)
     if request.META.get("HTTP_HX_REQUEST"):
@@ -145,10 +144,9 @@ def add_foodentry(request: HttpRequest) -> HttpResponse:
     food = get_object_or_404(Food, pk=food_id)
     entry_date = datetime.strptime(date_str, "%Y/%m/%d/").date()
 
-    # Hole oder erstelle FoodEntry für diesen Tag
+    # Get or create Foodentry for the current day
     food_entry, _ = FoodEntry.objects.get_or_create(date=entry_date)
-    print(amount)
-    # Erstelle ein FoodEntryItem mit Beispiel-Menge
+
     FoodEntryItem.objects.create(
         food_entry=food_entry,
         food=food,
