@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Optional, cast
 
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
@@ -34,6 +34,7 @@ def get_guineapigfoodcontrol_days(year: Optional[int] = None, month: Optional[in
 def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) -> HttpResponse:
     try:
         raw_shift = request.GET.get("shift", 0)  # +1 = next month, -1 = prev month
+
         if not raw_shift:
             selected_date = date(year, month, day) if year and month and day else date.today()
         else:
@@ -54,9 +55,7 @@ def guineapigfoodcontrol(request: HttpRequest, year=None, month=None, day=None) 
             selected_date = date(shifted_year, shifted_month, 1)
     except ValueError:
         selected_date = date.today()
-    print(
-        get_guineapigfoodcontrol_days(selected_date.year, selected_date.month),
-    )
+
     food_items = Food.objects.all()
     food_entry, _ = FoodEntry.objects.get_or_create(date=selected_date)
     weeks = []
@@ -135,10 +134,14 @@ def add_foodentry(request: HttpRequest) -> HttpResponse:
     date_str = request.POST.get("date")  # Format: "yyyy/m/d/"
     amount = request.POST.get("amount")  # Format: "yyyy/m/d/"
 
-    if not (food_id or date_str or amount):
-        return HttpResponseBadRequest(b"Fehlende Daten")
+    if not (food_id and date_str and amount):
+        return HttpResponseBadRequest(b"Missing Data")
 
-    amount = cast(Decimal, amount)
+    try:
+        amount = Decimal(str(amount))
+    except (InvalidOperation, TypeError):
+        return HttpResponseBadRequest(b"Invalid amount")
+
     date_str = cast(str, date_str)
 
     food = get_object_or_404(Food, pk=food_id)
@@ -158,7 +161,10 @@ def add_foodentry(request: HttpRequest) -> HttpResponse:
 
 def get_foodentry(request: HttpRequest) -> HttpResponse:
     date_str = request.GET.get("date")
-    entry_date = datetime.strptime(date_str, "%Y/%m/%d/").date()
+    if not date_str:
+        return HttpResponseBadRequest(b"Date missing")
+
+    entry_date = datetime.strptime(str(date_str), "%Y/%m/%d/").date()
 
     food_entry, _ = FoodEntry.objects.get_or_create(date=entry_date)
     return render(request, "guineapigfoodcontrol/partials/food_item_calendar.html", {"food_entry": food_entry})

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import add_food_items, add_foodentry, guineapigfoodcontrol, food_items, get_foodentry
+from .views import add_food_items, add_foodentry, food_items, get_foodentry, guineapigfoodcontrol
 
 app_name = "guineapigfoodcontrol"
 urlpatterns = [
